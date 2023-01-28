@@ -447,13 +447,30 @@ Celebrate! We've just deployed our NFT contract to the Filecoin hyperspace testn
 
 ## 🎬 Building the Front-End Interactions
 
-\[coming soon\]
+Wooo onto the pretty part... and also the glue that holds it all together here :)
 
-**NFT.Storage**
+To build the front end, I'm using NextJS and Typescript. Though, to be honest - I'm not taking advantage of any of NextJS's SSR (server-side rendering) features and I don't even use their page routing (since it's a single-page Dapp), so you could really just go with a vanilla React set up (or any framework of your choice of course!).  
+  
+As for the typescript... well, I built this in a bit of a rush and have to admit this is not a very good example of Typescript.
 
-**Contract Interactions**
+![](https://i.imgflip.com/792lnu.jpg align="center")
 
-**Bacalhau Interactions**
+Anyhoo - the main point of this section is not to show you how to code a front end, but to show you how to interact with the smart contract, Bacalhau (with our stable diffusion ML model) and of course, NFT.Storage from it. #notOnIPFSNotYourNFT
+
+### **Contract Interactions**
+
+There are 3 types of interactions here
+
+* read-only calls to retrieve data from the chain without mutating it
+    
+* write calls that require a wallet to sign and pay gas ie. functions that change the state of the chain, like minting the NFT!
+    
+* event listeners - that listen for events emitted from the contract
+    
+
+For all of these functions, we'll use the [ethers.js library](https://docs.ethers.org/v5/) - a lightweight wrapper for the Ethereum API, to connect to our contract and perform calls to it.
+
+### **Bacalhau Interactions**
 
 Creating the front-end API endpoint for Bacalhau is documented in [this project report](https://bacalhau.substack.com/p/bacalhau-project-report-jan-25-2022) by engineer [Luke Marsden](https://twitter.com/lmarsden).
 
@@ -500,6 +517,10 @@ This call will return an IPFS CID (content identifier) with a folder structure l
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1674856969385/6b8d9f88-ac55-4565-bcf6-ac2173cb6dcd.png align="center")
 
 ![](https://bafybeicwzflyf5sole4itagpguf2oktscx3gtgoappmj3nqqqdhfrwzhle.ipfs.nftstorage.link/outputs/image0.png align="center")
+
+### **NFT.Storage**
+
+Why NFT.Storage? Where did this part come from?
 
 ## 📺 Deploying the front end to Fleek
 
