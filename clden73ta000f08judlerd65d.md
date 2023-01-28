@@ -449,26 +449,13 @@ Celebrate! We've just deployed our NFT contract to the Filecoin hyperspace testn
 
 Wooo onto the pretty part... and also the glue that holds it all together here :)
 
-To build the front end, I'm using NextJS and Typescript. Though, to be honest - I'm not taking advantage of any of NextJS's SSR (server-side rendering) features and I don't even use their page routing (since it's a single-page Dapp), so you could really just go with a vanilla React set up (or any framework of your choice of course!).  
-  
-As for the typescript... well, I built this in a bit of a rush and have to admit this is not a very good example of Typescript.
+To build the front end, I'm using NextJS and Typescript. Though, to be honest - I'm not taking advantage of any of NextJS's SSR (server-side rendering) features and I don't even use their page routing (since it's a single-page Dapp), so you could really just go with a vanilla React set up (or any framework of your choice of course!).
+
+As for the typescript... well, I built this in a bit of a rush and have to admit this is not a very good example of Typescript - the vars seem happy though... ;)
 
 ![](https://i.imgflip.com/792lnu.jpg align="center")
 
-Anyhoo - the main point of this section is not to show you how to code a front end, but to show you how to interact with the smart contract, Bacalhau (with our stable diffusion ML model) and of course, NFT.Storage from it. #notOnIPFSNotYourNFT
-
-### **Contract Interactions**
-
-There are 3 types of interactions here
-
-* read-only calls to retrieve data from the chain without mutating it
-    
-* write calls that require a wallet to sign and pay gas ie. functions that change the state of the chain, like minting the NFT!
-    
-* event listeners - that listen for events emitted from the contract
-    
-
-For all of these functions, we'll use the [ethers.js library](https://docs.ethers.org/v5/) - a lightweight wrapper for the Ethereum API, to connect to our contract and perform calls to it.
+Anyhoo - the main point of this section is not to show you how to code a front end, but to show you how to interact with the smart contract, Bacalhau (with our stable diffusion ML model) and of course, NFT.Storage - #NotOnIPFSNotYourNFT.
 
 ### **Bacalhau Interactions**
 
@@ -520,7 +507,90 @@ This call will return an IPFS CID (content identifier) with a folder structure l
 
 ### **NFT.Storage**
 
-Why NFT.Storage? Where did this part come from?
+NFT.Storage is a public good (aka free) to store NFT Metadata perpetually on IPFS & Filecoin.
+
+NFT Metadata is a JSON document that looks something like the example below -which is taken directly from the Open Zeppelin docs:
+
+![](https://lh4.googleusercontent.com/hvXnX_VZ8d9Lr3TqHZWIZatMh_mfsFI9ZNCpJgjMeFu54UNBrfw3sePIMDDZ8EfWFrzaeLzSCd0Zn_zRmr5U-sC6_c6Nn5_2vYMwbtx68L0fFfOLk6fEG8coXNgP3DTra6pr7AJbm2cXejG_4NsXWI3EZg=s2048 align="left")
+
+When creating NFTs, it's important to note that unless you are storing the metadata on-chain (which can become prohibitively expensive for large files), then in order to continue to conform to the 'non-fungibility' of a token, you need storage that is persistent, reliable and ***immutable.***
+
+If your NFT has a location-based address like the above example, then it's fairly simple for this location path to be switched out after a sale, meaning the NFT you thought you paid for becomes something entirely different - or a literal rug pull in the case below.
+
+![](https://lh4.googleusercontent.com/Oqij2aelePDTaE0yoDBnIx77-IZvCCQYyYNPFkvbUI12Hp6_KQ2KiOaTuCa3ccfR76vnLAOYzj3j9K9W7Y_-u_SbpJwWC5kVVLHl_qleTRrmC9FgCWFm1ch_iWx66clSzjRxfe3zuyZUepU0F3ALnFIr=s2048 align="left")
+
+![](https://lh6.googleusercontent.com/azZfRPoeJbjJLvntGgSZZFJLgqPpIYK3unC_Pym0bStsRr0KfRzaCxbXxpM5VV1kapxr47pigYC5qUfO2n9FsijFrtmO1xTbBgD1h1s4lyq5punKH1NRdy6VGPOi58VcjPr1QA-qVyGsk5FC_65sIkYk=s2048 align="left")
+
+Something even Open Zeppelin warns about!
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1674907241854/879ff3ff-7e6f-462a-97f3-0456c1ae80cd.png align="center")
+
+### **Contract Interactions**
+
+There are 3 types of interactions here
+
+* read-only calls to retrieve data from the chain without mutating it
+    
+* write calls that require a wallet to sign and pay gas ie. functions that change the state of the chain, like minting the NFT!
+    
+* event listeners - that listen for events emitted from the contract
+    
+
+For all of these functions, we'll use the [ethers.js library](https://docs.ethers.org/v5/) - a lightweight wrapper for the Ethereum API, to connect to our contract and perform calls to it.
+
+Connecting to the contract in read-mode:
+
+```typescript
+//The compiled contract found in pages/api/hardhat/artifacts/contracts  
+import BacalhauCompiledContract from '@Contracts/BacalhauFRC721.sol/BacalhauFRC721.json';
+//On-chain address of the contract
+const contractAddressHyperspace = '0x773d8856dd7F78857490e5Eea65111D8d466A646'; 
+//A public RPC Endpoint (see table from contract section)
+const rpc = 'https://api.hyperspace.node.glif.io/rpc/v1';
+
+const provider = new ethers.providers.JsonRpcProvider(rpc);
+const connectedReadBacalhauContract = new ethers.Contract(
+      contractAddressHyperspace,
+      BacalhauCompiledContract.abi,
+      provider
+    );
+```
+
+Listening for events on the contract. Since this is a read event, we can use the public RPC to listen for event emissions on-chain.
+
+```typescript
+//use the read-only connected Bacalhau Contract
+const connectedContract = connectedReadBacalhauContract;
+connectedContract.on(
+    // Listen for the specific event we made in our contract
+    'NewBacalhauFRC721NFTMinted',
+    (sender: string, tokenId: number, tokenURI: string) => {
+        //DO STUFF WHEN AN EVENT COMES IN
+        // eg. re-fetch NFT's or store in state
+    }
+);
+```
+
+Connecting to the contract in **write** mode - this requires that the Ethereum object is being injected into the web browser by a wallet so that a user can sign for a transaction and pay for gas.
+
+```typescript
+//The compiled contract found in pages/api/hardhat/artifacts/contracts  
+import BacalhauCompiledContract from '@Contracts/BacalhauFRC721.sol/BacalhauFRC721.json';
+//On-chain address of the contract
+const contractAddressHyperspace = '0x773d8856dd7F78857490e5Eea65111D8d466A646'; 
+
+//check for the ethereum object
+if (window.ethereum) {
+   const provider = new ethers.providers.Web3Provider(window.ethereum);
+   const contract = new ethers.Contract(
+      contractAddressHyperspace,
+      BacalhauCompiledContract.abi,
+      provider
+    );
+   const signer = provider.getSigner();
+   const connectedWriteBacalhauContract = contract.connect(signer);
+}
+```
 
 ## 📺 Deploying the front end to Fleek
 
