@@ -803,7 +803,6 @@ export const addHyperspaceNetwork = async () => {
       });
   }
 };
-
 ```
 
 Call the contract mint function in write mode....
@@ -854,7 +853,9 @@ const mintNFT = async (metadata: any) => {
 }
 ```
 
-Wooo - NFT Minted!!
+Wooo - NFT Minted!! Unicorn dance mode time!
+
+![Dancing Unicorn GIFs | Tenor](https://media.tenor.com/MvvXjGVrnMQAAAAC/dancing-unicorn-unicorn.gif align="center")
 
 ## 📺 Deploying the front end to Fleek
 
