@@ -863,13 +863,50 @@ Wooo - NFT Minted!! Unicorn dance mode time!
 
 ## 🌟 Final Thoughts: Possibilities for AI & Blockchain
 
-\[coming soon\]
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1674954231170/942a1402-fa20-4ff1-bbc9-6d76bded634d.jpeg align="center")
+
+Bacalhau lends itself well to performing repetitive, deterministic processing jobs over data.
+
+* ETL Processes
+    
+* Machine Learning & AI
+    
+* IOT data integration
+    
+* Batch Processing including for
+    
+    * Financial and market data
+        
+* Video & Image processing - great for creatives
+    
+
+There are multiple examples in the [Bacalhau docs](https://docs.bacalhau.org/) of how to achieve some of the above too.
+
+While Bacalhau is busy building out an integration to directly call Bacalhau from FEVM Smart contracts, here's some thoughts on Bacalhau x FVM collaborations:
+
+* Help Onboarding and Offboarding of Filecoin data in the future
+    
+* Help build a reputation and Quality of Service layer for Filecoin by processing data retrieved on-chain about deals and storage providers.
+    
+* Bacalhau could provide computation for market & payment data
+    
+* Bacalhau could help with processing data from DAO’s & DataDAOs
+    
+* Bacalhau could help empower more automation for creative endeavours like video and images processing
+    
+* Bacalhau can enable game and metaverse data processing including for VR & AR.
+    
+* Bacalhau, IOT & Simulations are possible
+    
+* AI & ML Applications
+    
 
 ## 🐠 The Bacalhau Roadmap
 
-**We're currently building out a way for you to run Bacalhau directly from your smart contracts!!!!** This project is called Project Frog / Project Lilypad.
+**We're currently building out a way for you to run Bacalhau directly from your smart contracts!!!!**  
+This project is called Project Frog / Project Lilypad - and will be an integration layer that will enable calling Bacalhau jobs from FEVM smart contracts.
 
-Keep an eye on the progress of this by signing up to our newsletter or the below socials.
+Keep an eye on the progress of this by signing up for our newsletter or joining the below socials.
 
 ## ✍️ Keep in touch!
 
@@ -892,4 +929,4 @@ Keep in touch with Bacalhau!
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1674791065491/9f66f9b5-858f-4db6-8ed7-83ffd0c63c80.png align="center")
 
-♥️ [@DeveloperAlly](https://twitter.com/DeveloperAlly)
+With ♥️ [DeveloperAlly](https://twitter.com/DeveloperAlly)
