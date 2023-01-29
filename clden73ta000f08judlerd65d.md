@@ -2,7 +2,7 @@
 
 > 🦄 **Quick links:**
 > 
-> * [Video version](https://www.youtube.com/@ETHGlobal/videos)
+> * [Video version](https://youtu.be/dpWzLqt4LV4)
 >     
 > * [GitHub code](https://github.com/DeveloperAlly/bacalhau-fvm-nft)
 >     
