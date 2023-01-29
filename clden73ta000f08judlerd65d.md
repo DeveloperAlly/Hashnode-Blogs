@@ -188,7 +188,7 @@ Great, we can generate images from a text prompt, but um... where to run this GP
 
 If there's one thing that blockchain technology does not do inherently well, it is large data processing. This is due to the cost of computing over a distributed system to provide other powerful properties like trustlessness and censorship resistance.
 
-Using your local machine for small examples is possible - in fact I did manage to get this particular example working on my (very unhappy about it) Mac M1, however, it was a very long wait on results (game of table tennis anyone?) so, once you start doing bigger data processing, you are going to need more gas (pun intended) and if you don’t have a dedicated server lying around the house, then you’re going to need to use a virtual machine on a cloud computing platform. Not only is that centralised, it's also inefficient - due to the data being an unknown distance from the computation machine, and it can get costly fast. I failed to find any free-tier cloud computing service that offered GPU processing for this (did someone say crypto mining bans..?) and plans came in at &gt; US$400 a month.
+Using your local machine for small examples is possible - in fact I did manage to get this particular example working on my (very unhappy about it) Mac M1, however, it was a very long wait on results (game of table tennis anyone?) so, once you start doing bigger data processing, you are going to need more gas (pun intended) and if you don’t have a dedicated server lying around the house, then you’re going to need to use a virtual machine on a cloud computing platform. Not only is that centralised, it's also inefficient - due to the data being an unknown distance from the computation machine, and it can get costly fast. I failed to find any free-tier cloud computing service that offered GPU processing for this (did someone say crypto mining bans..?) and plans came in at **\&gt; US$400** a month (no thankyou).
 
 ![](https://lh4.googleusercontent.com/LnnSpxEN-MXg4fm2ZBxxowXm2E296RM9Vnth-0Y1lYUZFDRt5RPSBEdwSpRmzQbykG6_BCVHxWcbiEXSwKRjkHHLn9MhLeenOHvH6MUgEXxHUghzOn7xE6CelL-SK453mRw4OzoD6-HmRNhKU-T0XxwUcA=s2048 align="center")
 
@@ -198,7 +198,7 @@ Luckily though, these problems are some of the issues Bacalhau is trying to solv
 
 Bacalhau is aiming to help democratise the future of data processing by enabling off-chain computation over data without giving up the decentralisation values inherent to IPFS, Filecoin & Web3 more broadly.
 
-[Bacalhau](https://docs.bacalhau.org/) is a peer-to-peer open computation network that provides a platform for public, transparent and optionally verifiable computation processes where users can run Docker containers or Web Assembly images as tasks against *any* data including data stored in IPFS (& soon Filecoin). It even has support for GPU jobs (something that I couldn't find on any free tier from a cloud provider!)
+[Bacalhau](https://docs.bacalhau.org/) is a peer-to-peer open computation network that provides a platform for public, transparent and optionally verifiable computation processes where users can run Docker containers or Web Assembly images as tasks against *any* data including data stored in IPFS (& soon Filecoin). It even has support for GPU jobs and not at US$400 or more!
 
 ![intro | Bacalhau Docs](https://docs.bacalhau.org/assets/images/bacalhau-high-level-view-4866977e82dcfd7b4ec1872ce327f856.png align="center")
 
@@ -223,13 +223,15 @@ Let's move on to the NFT script though! :)
 
 **The Smart Contract**
 
-The NFT Smart Contract is based on [Open Zeppelin's implementation of](https://docs.openzeppelin.com/contracts/4.x/erc721) ERC721 but uses the ERC721URIStorage implementation, which includes the metadata standard extensions (so we can pass in our IPFS-addressed metadata - which we'll save on NFT.Storage, to the contract).
+The NFT Smart Contract is based on [Open Zeppelin's implementation](https://docs.openzeppelin.com/contracts/4.x/erc721) of ERC721 but uses the ERC721URIStorage version, which includes the metadata standard extensions (so we can pass in our IPFS-addressed metadata - which we'll save on NFT.Storage, to the contract).
 
 This base contract additionally gives us the general functionality of an NFT contract with functions like mint() and transfer() already implemented for us.
 
 You'll notice I've also added a couple of getter functions to fetch data for my front end as well as an Event that will be emitted on-chain each time a new NFT is minted. This gives the ability to listen to on-chain events from the DApp.
 
-💡 [Try it out on remix and see all the available functions by clicking this link!](https://remix.ethereum.org/DeveloperAlly/bacalhau-fvm-nft/blob/main/pages/api/hardhat/contracts/BacalhauFRC721.sol) 💡
+> 💡 [Try it out on remix and see all the available functions by clicking this link!](https://remix.ethereum.org/DeveloperAlly/bacalhau-fvm-nft/blob/main/pages/api/hardhat/contracts/BacalhauFRC721.sol) 💡
+
+`BacalhauFRC721.sol`
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -337,14 +339,14 @@ To deploy to Hyperspace Testnet we'll need to
 
 I'm using hardhat to deploy this contract to the Hyperspace testnet.
 
-Hyperspace RPC & BlockExplorer Options:
-
-| Public RPC Endpoints | BlockExplorer's |
-| --- | --- |
-| [https://filecoin-hyperspace.chainstacklabs.com/rpc/v0](https://filecoin-hyperspace.chainstacklabs.com/rpc/v0) | [https://beryx.zondax.ch/](https://beryx.zondax.ch) |
-| [https://hyperspace.filfox.info/rpc/v0](https://hyperspace.filfox.info/rpc/v0) | [https://fvm.starboard.ventures/contracts/](https://fvm.starboard.ventures/contracts/) |
-| [https://rpc.ankr.com/filecoin\_testnet](https://rpc.ankr.com/filecoin_testnet) | [https://explorer.glif.io/?network=hyperspacenet](https://explorer.glif.io/?network=hyperspacenet) |
-| **Open API**: https://beryx.zondax.ch/ | [https://hyperspace.filfox.info/en](https://hyperspace.filfox.info/en) |
+> 🛸 **Hyperspace RPC & BlockExplorer Options:**
+> 
+> | Public RPC Endpoints | BlockExplorer's |
+> | --- | --- |
+> | [https://filecoin-hyperspace.chainstacklabs.com/rpc/v0](https://filecoin-hyperspace.chainstacklabs.com/rpc/v0) | [https://beryx.zondax.ch/](https://beryx.zondax.ch) |
+> | [https://hyperspace.filfox.info/rpc/v0](https://hyperspace.filfox.info/rpc/v0) | [https://fvm.starboard.ventures/contracts/](https://fvm.starboard.ventures/contracts/) |
+> | [https://rpc.ankr.com/filecoin\_testnet](https://rpc.ankr.com/filecoin_testnet) | [https://explorer.glif.io/?network=hyperspacenet](https://explorer.glif.io/?network=hyperspacenet) |
+> | **Open API**: https://beryx.zondax.ch/ | [https://hyperspace.filfox.info/en](https://hyperspace.filfox.info/en) |
 
 For the config set-up, we can choose from any of the available public RPC endpoints.
 
@@ -397,7 +399,7 @@ const config: HardhatUserConfig = {
 export default config;
 ```
 
-And to deploy the smart contract we created
+And to deploy the smart contract we create a deploy script - note that I'm specifically setting the Wallet address here as the signer (owner) - there are a few mapping errors still being worked in FEVM out at the time of writing that can cause some odd behaviour.
 
 `deploy/deployBacalhauFRC721.ts`
 
@@ -410,7 +412,7 @@ import type { BacalhauFRC721__factory } from '../typechain-types/factories/contr
 async function main() {
   console.log('Bacalhau721 deploying....');
 
-   // needed as hardhat's default does not map correctly to the FEVM
+// !!!needed as hardhat's default does not map correctly to the FEVM
   const owner = new hre.ethers.Wallet(
     process.env.WALLET_PRIVATE_KEY || 'undefined',
     hre.ethers.provider
@@ -482,9 +484,13 @@ Creating the front-end API endpoint for Bacalhau is documented in [this project 
 
 The API currently *only* directly hits the stable diffusion scripts documented in this blog, however, the team is in the process of extending it into a more generic API so that you can call any of the examples, and also your own deployed scripts from an HTTP REST API. Keep an eye on this [here](https://github.com/filecoin-project/bacalhau) or in the #bacalhau channel in [FilecoinProject slack.](https://filecoinproject.slack.com/)
 
+`>run/test in terminal`
+
 ```bash
 curl -XPOST -d '{"prompt": "rainbow unicorn"}' 'http://dashboard.bacalhau.org:1000/api/v1/stablediffusion';
 ```
+
+`>react / typescript code`
 
 ```typescript
 import { CID } from 'multiformats/cid';
@@ -518,21 +524,25 @@ export const callBacalhauJob = async (promptInput: string) => {
 };
 ```
 
-This call will return an IPFS CID (content identifier) with a folder structure like the one below. The image can be found at `/outputs/image0.png`. [See it for yourself by clicking here](https://bafybeicwzflyf5sole4itagpguf2oktscx3gtgoappmj3nqqqdhfrwzhle.ipfs.nftstorage.link/)!
+This function will return an IPFS CID (content identifier) with a folder structure like the one below. The image can then be found under `/outputs/image0.png`.
+
+> 💡 [**See it for yourself by clicking here**](https://bafybeicwzflyf5sole4itagpguf2oktscx3gtgoappmj3nqqqdhfrwzhle.ipfs.nftstorage.link/)**!** 💡
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1674856969385/6b8d9f88-ac55-4565-bcf6-ac2173cb6dcd.png align="center")
 
 ![](https://bafybeicwzflyf5sole4itagpguf2oktscx3gtgoappmj3nqqqdhfrwzhle.ipfs.nftstorage.link/outputs/image0.png align="center")
 
+Ahhh rainbow unicorns... what's not to like!
+
 ### **NFT.Storage**
 
-NFT.Storage is a public good (aka free) that makes it easy to store NFT Metadata perpetually on IPFS & Filecoin with either a javascript or http sdk.
+NFT.Storage is a public good (aka free) that makes it easy to store NFT Metadata perpetually on IPFS & Filecoin with either a javascript or HTTP SDK.
 
 NFT Metadata is a JSON document that looks something like the example below -which is taken directly from the Open Zeppelin docs:
 
 ![](https://lh4.googleusercontent.com/hvXnX_VZ8d9Lr3TqHZWIZatMh_mfsFI9ZNCpJgjMeFu54UNBrfw3sePIMDDZ8EfWFrzaeLzSCd0Zn_zRmr5U-sC6_c6Nn5_2vYMwbtx68L0fFfOLk6fEG8coXNgP3DTra6pr7AJbm2cXejG_4NsXWI3EZg=s2048 align="left")
 
-When creating NFTs, it's important to note that unless you are storing the metadata on-chain (which can become prohibitively expensive for large files), then in order to continue to conform to the 'non-fungibility' of a token, you need storage that is persistent, reliable and ***immutable.***
+When creating NFTs, it's important to note that unless you are storing the metadata on-chain (which can become prohibitively expensive for large files), then in order to conform to the 'non-fungibility' of a token, you need storage that is persistent, reliable and ***immutable.***
 
 If your NFT has a location-based address like the above example, then it's fairly simple for this location path to be switched out after a sale, meaning the NFT you thought you bought becomes something entirely different - or a literal rug pull in the case below where the NFT creator switched out the art images for pictures of rugs.
 
@@ -544,7 +554,7 @@ Something even Open Zeppelin warns about!
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1674907241854/879ff3ff-7e6f-462a-97f3-0456c1ae80cd.png align="center")
 
-Using NFT.Storage means that we get an immutable IPFS file CID for our metadata which is not just pinned to IPFS but also then stored to Filecoin for persistence.  
+Using NFT.Storage means that we get an immutable IPFS file CID (**content** - not location - **id**entifier) for our metadata which is not just pinned to IPFS but also then stored to Filecoin for persistence.  
 You'll just need to sign up for NFT.Storage and get an [API key](https://nft.storage/manage/) (to save in your .env file) for this one.
 
 `.env example`
@@ -553,7 +563,7 @@ You'll just need to sign up for NFT.Storage and get an [API key](https://nft.sto
 NEXT_PUBLIC_NFT_STORAGE_API_KEY=xxx
 ```
 
-Using NFT.Storage Example
+We also need to make sure that we have created a properly formed Metadata JSON - because while FVM doesn't (yet!) have NFT Marketplaces... we do want to make sure that when it's adopted our NFT still hopefully conforms to the standard.
 
 ```typescript
 import { NFTStorage } from 'nft.storage';
@@ -562,19 +572,50 @@ import { NFTStorage } from 'nft.storage';
 const NFTStorageClient = new NFTStorage({
    token: process.env.NEXT_PUBLIC_NFT_STORAGE_API_KEY,
 });
+ 
+const createNFTMetadata = async (
+    promptInput: string,
+    imageIPFSOrigin: string, //the ipfs path eg. ipfs://[CID]
+    imageHTTPURL: string //an ipfs address fetchable through http for the front end to use (ie. including an ipfs http gateway on it like https://[CID].ipfs.nftstorage.link)
+  ) => {
+    console.log('Creating NFT Metadata...');
+    let nftJSON;
+ // let's get the image data Blob from the IPFS CID that was returned from Bacalhau earlier...
+    await getImageBlob(status, setStatus, imageHTTPURL).then(
+      async (imageData) => {
+// Now let's create a unique CID for that image data - since we don't really want the rest of the data returned from the Bacalhau job..
+        await NFTStorageClient.storeBlob(imageData)
+          .then((imageIPFS) => {
+            console.log(imageIPFS);
+//Here's the JSON construction - only name, description and image are required fields- but I also want to save some other properties like the ipfs link and perhaps you have other properties that give your NFT's rarity to add as well
+            nftJSON = {
+              name: 'Bacalhau Hyperspace NFTs 2023',
+              description: promptInput,
+              image: imageIPFSOrigin, 
+              properties: {
+                prompt: promptInput,
+                type: 'stable-diffusion-image',
+                origins: {
+                  ipfs: `ipfs://${imageIPFS}`,
+                  bacalhauipfs: imageIPFSOrigin,
+                },
+                innovation: 100,
+                content: {
+                  'text/markdown': promptInput,
+                },
+              },
+            };
+          })
+          .catch((err) => console.log('error creating blob cid', err));
+      }
+    );
+    return nftJSON;
+  };
+```
 
-/* Store it!
-@param
-nftJson {
-    name: string
-    description: string
-    image: Blob
-    properties: {
-//            any other properties. I'm using an origin for the image                                     //            ipfs address
-    }
-{
+Now let's store this metadata to NFT.Storage!
 
-*/
+```typescript
 await NFTStorageClient.store(nftJson)
   .then((metadata) => {
     // DONE! - do something with this returned metadata!
@@ -591,11 +632,11 @@ await NFTStorageClient.store(nftJson)
 Woot - we have our image from Bacalhau, we've saved our metadata immutably and persistently with NFT.Strorage, now let's mint our NFT!
 
 > 💡 **Quick Tip** 💡  
-> NFT.Storage also offers a range of other [API calls](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html) like store Car & storeDirectory as well as a **status() function** - which returns the IPFS pinning and Filecoin storage deals of a CID -&gt; this could be a pretty cool addition for a FEVM DApp (or NFT implementation on FEVM once FEVM hits mainnet release) for checking on NFTs status.
+> NFT.Storage also offers a range of other [**API calls**](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html) like storeCar & storeDirectory as well as a **status() function** - which returns the IPFS pinning and Filecoin storage deals of a CID -&gt; this could be a pretty cool addition for a FEVM DApp (or NFT implementation on FEVM once FEVM hits mainnet release) for checking on NFTs status.
 
 ### **Contract Interactions**
 
-There are 3 types of interactions here (and a few FEVM gotcha's - beta tech is always going to have some quirky <s>bugs</s> features)
+There are 3 types of interactions here (and a few FEVM gotcha's - beta tech is always going to have some quirky <s>bugs</s> features!)
 
 * read-only calls to retrieve data from the chain without mutating it
     
