@@ -457,11 +457,30 @@ As for the typescript... well, I built this in a bit of a rush and have to admit
 
 Anyhoo - the main point of this section is not to show you how to code a front end, but to show you how to interact with the smart contract, Bacalhau (with our stable diffusion ML model) and of course, NFT.Storage - #NotOnIPFSNotYourNFT.
 
+### Complete Flow
+
+\[todo: build a flow chart diagram\]
+
+* The user enters a text prompt into the input field -&gt;
+    
+* Clicks Generate Images Button -&gt; Calls Bacalhau Job to Generate images
+    
+* Bacalhau Job completes -&gt; formats return into NFT Metadata JSON object
+    
+* User Clicks Mint NFT Button -&gt; NFT.Storage is called to save the NFT Metadata and returns with an IPFS CID for the folder -&gt; The mint NFT function of the smart contract is called with this IPFS\_URI to mint an NFT with this metadata -&gt;
+    
+* !! \[FEVM gotcha\] -&gt; here we would generally wait for the TX (transaction hash) of this result to return, but it's currently not working, so instead we're using a contract event listener to find out when this completes.
+    
+* Done! -&gt; Can now re-fetch any display data and give the user status success feedback on the minting.
+    
+
+Nice - let's see how we implement this in code!
+
 ### **Bacalhau Interactions**
 
 Creating the front-end API endpoint for Bacalhau is documented in [this project report](https://bacalhau.substack.com/p/bacalhau-project-report-jan-25-2022) by engineer [Luke Marsden](https://twitter.com/lmarsden).
 
-The API currently only directly hits the stable diffusion scripts documented in this blog, however, the team is in the process of extending it into a more generic API so that you can call any of the examples, and also your own deployed scripts from an HTTP REST API. Keep an eye on this [here](https://github.com/filecoin-project/bacalhau) or in the #bacalhau channel in filecoinproject.slack.
+The API currently *only* directly hits the stable diffusion scripts documented in this blog, however, the team is in the process of extending it into a more generic API so that you can call any of the examples, and also your own deployed scripts from an HTTP REST API. Keep an eye on this [here](https://github.com/filecoin-project/bacalhau) or in the #bacalhau channel in [FilecoinProject slack.](https://filecoinproject.slack.com/)
 
 ```bash
 curl -XPOST -d '{"prompt": "rainbow unicorn"}' 'http://dashboard.bacalhau.org:1000/api/v1/stablediffusion';
@@ -515,7 +534,7 @@ NFT Metadata is a JSON document that looks something like the example below -whi
 
 When creating NFTs, it's important to note that unless you are storing the metadata on-chain (which can become prohibitively expensive for large files), then in order to continue to conform to the 'non-fungibility' of a token, you need storage that is persistent, reliable and ***immutable.***
 
-If your NFT has a location-based address like the above example, then it's fairly simple for this location path to be switched out after a sale, meaning the NFT you thought you paid for becomes something entirely different - or a literal rug pull in the case below.
+If your NFT has a location-based address like the above example, then it's fairly simple for this location path to be switched out after a sale, meaning the NFT you thought you bought becomes something entirely different - or a literal rug pull in the case below where the NFT creator switched out the art images for pictures of rugs.
 
 ![](https://lh4.googleusercontent.com/Oqij2aelePDTaE0yoDBnIx77-IZvCCQYyYNPFkvbUI12Hp6_KQ2KiOaTuCa3ccfR76vnLAOYzj3j9K9W7Y_-u_SbpJwWC5kVVLHl_qleTRrmC9FgCWFm1ch_iWx66clSzjRxfe3zuyZUepU0F3ALnFIr=s2048 align="left")
 
@@ -525,9 +544,58 @@ Something even Open Zeppelin warns about!
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1674907241854/879ff3ff-7e6f-462a-97f3-0456c1ae80cd.png align="center")
 
+Using NFT.Storage means that we get an immutable IPFS file CID for our metadata which is not just pinned to IPFS but also then stored to Filecoin for persistence.  
+You'll just need to sign up for NFT.Storage and get an [API key](https://nft.storage/manage/) (to save in your .env file) for this one.
+
+`.env example`
+
+```typescript
+NEXT_PUBLIC_NFT_STORAGE_API_KEY=xxx
+```
+
+Using NFT.Storage Example
+
+```typescript
+import { NFTStorage } from 'nft.storage';
+
+//connect to NFT.Storage Client
+const NFTStorageClient = new NFTStorage({
+   token: process.env.NEXT_PUBLIC_NFT_STORAGE_API_KEY,
+});
+
+/* Store it!
+@param
+nftJson {
+    name: string
+    description: string
+    image: Blob
+    properties: {
+//            any other properties. I'm using an origin for the image                                     //            ipfs address
+    }
+{
+
+*/
+await NFTStorageClient.store(nftJson)
+  .then((metadata) => {
+    // DONE! - do something with this returned metadata!
+    console.log('NFT Data pinned to IPFS & stored on Filecoin!');
+    console.log('Metadata URI: ', metadata.url);
+    // once saved we can use it to mint the NFT
+    // mintNFT(metadata);
+  })
+  .catch((err) => {
+    console.log('error uploading to nft.storage');
+  });
+```
+
+Woot - we have our image from Bacalhau, we've saved our metadata immutably and persistently with NFT.Strorage, now let's mint our NFT!
+
+> 💡 **Quick Tip** 💡  
+> NFT.Storage also offers a range of other [API calls](https://nftstorage.github.io/nft.storage/client/classes/lib.NFTStorage.html) like store Car & storeDirectory as well as a **status() function** - which returns the IPFS pinning and Filecoin storage deals of a CID -&gt; this could be a pretty cool addition for a FEVM DApp (or NFT implementation on FEVM once FEVM hits mainnet release) for checking on NFTs status.
+
 ### **Contract Interactions**
 
-There are 3 types of interactions here
+There are 3 types of interactions here (and a few FEVM gotcha's - beta tech is always going to have some quirky <s>bugs</s> features)
 
 * read-only calls to retrieve data from the chain without mutating it
     
@@ -538,7 +606,7 @@ There are 3 types of interactions here
 
 For all of these functions, we'll use the [ethers.js library](https://docs.ethers.org/v5/) - a lightweight wrapper for the Ethereum API, to connect to our contract and perform calls to it.
 
-Connecting to the contract in read-mode:
+Connecting to the contract in **read** mode with a public RPC:
 
 ```typescript
 //The compiled contract found in pages/api/hardhat/artifacts/contracts  
@@ -556,31 +624,38 @@ const connectedReadBacalhauContract = new ethers.Contract(
     );
 ```
 
-Listening for events on the contract. Since this is a read event, we can use the public RPC to listen for event emissions on-chain.
+Listening for events on the contract. Since this is a read-only (get) event, we can use the public RPC to listen for event emissions on-chain.
 
 ```typescript
 //use the read-only connected Bacalhau Contract
-const connectedContract = connectedReadBacalhauContract;
-connectedContract.on(
+connectedReadBacalhauContract.on(
     // Listen for the specific event we made in our contract
     'NewBacalhauFRC721NFTMinted',
     (sender: string, tokenId: number, tokenURI: string) => {
         //DO STUFF WHEN AN EVENT COMES IN
-        // eg. re-fetch NFT's or store in state
+        // eg. re-fetch NFT's, store in state and change page status
     }
 );
 ```
 
-Connecting to the contract in **write** mode - this requires that the Ethereum object is being injected into the web browser by a wallet so that a user can sign for a transaction and pay for gas.
+Connecting to the contract in **write** mode - this requires that the Ethereum object is being injected into the web browser by a wallet so that a user can sign for a transaction and pay for gas - which is why we're checking for a window.ethereum object.
 
 ```typescript
+//Typescript needs to know window is an object with potentially and ethereum value. There might be a better way to do this? Open to tips!
+declare let window: any;
 //The compiled contract found in pages/api/hardhat/artifacts/contracts  
 import BacalhauCompiledContract from '@Contracts/BacalhauFRC721.sol/BacalhauFRC721.json';
 //On-chain address of the contract
 const contractAddressHyperspace = '0x773d8856dd7F78857490e5Eea65111D8d466A646'; 
 
 //check for the ethereum object
-if (window.ethereum) {
+if (!window.ethereum) {
+    //ask user to install a wallet or connect
+    //abort this
+}
+// else there's a wallet provider
+else {
+// same function - different provider - this one has a signer - the user's connected wallet address
    const provider = new ethers.providers.Web3Provider(window.ethereum);
    const contract = new ethers.Contract(
       contractAddressHyperspace,
@@ -592,6 +667,195 @@ if (window.ethereum) {
 }
 ```
 
+Calling the mint Function using the write connected contract.
+
+First, ensure we have a wallet address from the user and that we're on the FVM Hyperspace chain. Here are a few helpful wallet functions you might want, including how to check the chainId, and how to programmatically add the Hyperspace network to Metamask / wallet.  
+You can interact with wallets using the Ethereum object directly or using ethers.js.
+
+```typescript
+declare let window: any;
+
+const fetchWalletAccounts = async () => {
+  console.log('Fetching wallet accounts...');
+  await window.ethereum //use ethers?
+    .request({ method: 'eth_requestAccounts' })
+    .then((accounts: string[]) => {
+      return accounts;
+    })
+    .catch((error: any) => {
+      if (error.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        console.log('Please connect to MetaMask.');
+      } else {
+        console.error(error);
+      }
+    });
+};
+
+const fetchChainId = async () => {
+  console.log('Fetching chainId...');
+  await window.ethereum
+    .request({ method: 'eth_chainId' })
+    .then((chainId: string[]) => {
+      return chainId;
+    })
+    .catch((error: any) => {
+      if (error.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        console.log('Please connect to MetaMask.');
+      } else {
+        console.error(error);
+      }
+    });
+};
+
+//!! This function checks for a wallet connection WITHOUT being intrusive to to the user or opening their wallet
+export const checkForWalletConnection = async () => {
+  if (window.ethereum) {
+    console.log('Checking for Wallet Connection...');
+    await window.ethereum
+      .request({ method: 'eth_accounts' })
+      .then(async (accounts: String[]) => {
+        console.log('Connected to wallet...');
+        // Found a user wallet
+        return true;
+      })
+      .catch((err: Error) => {
+        console.log('Error fetching wallet', err);
+        return false;
+      });
+  } else {
+    //Handle no wallet connection 
+    return false;
+  }
+};
+
+//Subscribe to changes on a user's wallet
+export const setWalletListeners = () => {
+  console.log('Setting up wallet event listeners...');
+  if (window.ethereum) {
+    // subscribe to provider events compatible with EIP-1193 standard.
+    window.ethereum.on('accountsChanged', (accounts: any) => {
+      //logic to check if disconnected accounts[] is empty
+      if (accounts.length < 1) {
+        //handle the locked wallet case
+      }
+      if (userWallet.accounts[0] !== accounts[0]) {
+        //user has changed address
+      }
+    });
+
+    // Subscribe to chainId change
+    window.ethereum.on('chainChanged', () => {
+      // handle changed chain case
+    });
+  } else { 
+        //handle the no wallet case
+    }
+};
+
+export const changeWalletChain = async (newChainId: string) => {
+  console.log('Changing wallet chain...');
+  const provider = window.ethereum;
+  try {
+    await provider.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: newChainId }], //newChainId
+    });
+  } catch (error: any) {
+    alert(error.message);
+  }
+};
+
+//AddHyperspaceChain
+export const addHyperspaceNetwork = async () => {
+  console.log('Adding the Hyperspace Network to Wallet...');
+  if (window.ethereum) {
+    window.ethereum
+      .request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          {
+            chainId: '0xc45',
+            rpcUrls: [
+              'https://hyperspace.filfox.info/rpc/v0',
+              'https://filecoin-hyperspace.chainstacklabs.com/rpc/v0',
+            ],
+            chainName: 'Filecoin Hyperspace',
+            nativeCurrency: {
+              name: 'tFIL',
+              symbol: 'tFIL',
+              decimals: 18,
+            },
+            blockExplorerUrls: [
+              'https://fvm.starboard.ventures/contracts/',
+              'https://hyperspace.filscan.io/',
+              'https://beryx.zondax.chfor',
+            ],
+          },
+        ],
+      })
+      .then((res: XMLHttpRequestResponseType) => {
+        console.log('added hyperspace successfully', res);
+      })
+      .catch((err: ErrorEvent) => {
+        console.log('Error adding hyperspace network', err);
+      });
+  }
+};
+
+```
+
+Call the contract mint function in write mode....
+
+```typescript
+// Pass in the metadata return from saving to NFT.Storage
+const mintNFT = async (metadata: any) => {  
+    await connectedWriteBacalhauContract
+    // The name of our function in our smart contract
+    .mintBacalhauNFT(
+      userWallet.accounts[0], //users account to use
+      metadata.url //test ipfs address
+    )
+    .then(async (data: any) => {
+      console.log('CALLED CONTRACT MINT FUNCTION', data);
+      await data
+        .wait()
+        .then(async (tx: any) => {
+          console.log('tx', tx);
+//CURRENTLY NOT RETURNING TX - (I use event triggering to know when this function is complete)
+          let tokenId = tx.events[1].args.tokenId.toString();
+          console.log('tokenId args', tokenId);
+          setStatus({
+            ...INITIAL_TRANSACTION_STATE,
+            success: successMintingNFTmsg(data),
+          });
+        })
+        .catch((err: any) => {
+          console.log('ERROR', err);
+          setStatus({
+            ...status,
+            loading: '',
+            error: errorMsg(err.message, 'Error minting NFT'),
+          });
+        });
+    })
+    .catch((err: any) => {
+      console.log('ERROR1', err);
+      setStatus({
+        ...status,
+        loading: '',
+        error: errorMsg(
+          err && err.message ? err.message : null,
+          'Error minting NFT'
+        ),
+      });
+    });
+}
+```
+
+Wooo - NFT Minted!!
+
 ## 📺 Deploying the front end to Fleek
 
 \[coming soon\]
@@ -602,7 +866,9 @@ if (window.ethereum) {
 
 ## 🐠 The Bacalhau Roadmap
 
-We're currently building out a way for you to run Bacalhau directly from your smart contracts!!!
+**We're currently building out a way for you to run Bacalhau directly from your smart contracts!!!!** This project is called Project Frog / Project Lilypad.
+
+Keep an eye on the progress of this by signing up to our newsletter or the below socials.
 
 ## ✍️ Keep in touch!
 
