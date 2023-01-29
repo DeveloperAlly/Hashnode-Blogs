@@ -526,7 +526,7 @@ This call will return an IPFS CID (content identifier) with a folder structure l
 
 ### **NFT.Storage**
 
-NFT.Storage is a public good (aka free) to store NFT Metadata perpetually on IPFS & Filecoin.
+NFT.Storage is a public good (aka free) that makes it easy to store NFT Metadata perpetually on IPFS & Filecoin with either a javascript or http sdk.
 
 NFT Metadata is a JSON document that looks something like the example below -which is taken directly from the Open Zeppelin docs:
 
