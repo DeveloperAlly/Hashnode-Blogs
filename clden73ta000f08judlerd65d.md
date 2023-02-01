@@ -2,7 +2,7 @@
 
 > 🦄 **Quick links:**
 > 
-> * [Video version](https://youtu.be/dpWzLqt4LV4)
+> * [Video version](https://www.youtube.com/watch?v=nu55bKXnjlU)
 >     
 > * [GitHub code](https://github.com/DeveloperAlly/bacalhau-fvm-nft)
 >     
@@ -188,7 +188,7 @@ Great, we can generate images from a text prompt, but um... where to run this GP
 
 If there's one thing that blockchain technology does not do inherently well, it is large data processing. This is due to the cost of computing over a distributed system to provide other powerful properties like trustlessness and censorship resistance.
 
-Using your local machine for small examples is possible - in fact I did manage to get this particular example working on my (very unhappy about it) Mac M1, however, it was a very long wait on results (game of table tennis anyone?) so, once you start doing bigger data processing, you are going to need more gas (pun intended) and if you don’t have a dedicated server lying around the house, then you’re going to need to use a virtual machine on a cloud computing platform. Not only is that centralised, it's also inefficient - due to the data being an unknown distance from the computation machine, and it can get costly fast. I failed to find any free-tier cloud computing service that offered GPU processing for this (did someone say crypto mining bans..?) and plans came in at **\&gt; US$400** a month (no thankyou).
+Using your local machine for small examples is possible - in fact I did manage to get this particular example working on my (very unhappy about it) Mac M1, however, it was a very long wait on results (game of table tennis anyone?) so, once you start doing bigger data processing, you are going to need more gas (pun intended) and if you don’t have a dedicated server lying around the house, then you’re going to need to use a virtual machine on a cloud computing platform. Not only is that centralised, it's also inefficient - due to the data being an unknown distance from the computation machine, and it can get costly fast. I failed to find any free-tier cloud computing service that offered GPU processing for this (did someone say crypto mining bans..?) and plans came in at **&gt; US$400** a month (no thankyou).
 
 ![](https://lh4.googleusercontent.com/LnnSpxEN-MXg4fm2ZBxxowXm2E296RM9Vnth-0Y1lYUZFDRt5RPSBEdwSpRmzQbykG6_BCVHxWcbiEXSwKRjkHHLn9MhLeenOHvH6MUgEXxHUghzOn7xE6CelL-SK453mRw4OzoD6-HmRNhKU-T0XxwUcA=s2048 align="center")
 
