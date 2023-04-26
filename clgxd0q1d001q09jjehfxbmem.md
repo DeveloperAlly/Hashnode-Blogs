@@ -1325,15 +1325,25 @@ Proving for truth, authenticity and provenance of data and content are going to 
 
 Waterlily is aiming to provide a new revenue stream for original creators and perhaps tackle some of the current issues with AI-Art generation. It could also serve as a thought experiment for how we go about both tokenising and training datasets in fully decentralised ways that continues to give individuals authority over their own data.
 
+# 🗺️ Roadmap
+
+Waterlily.ai is an open source repository. We welcome input via the github or submissions of ideas and feedback. Tell us what you think! Tell us what you think should happen next, or help us fix the 🐛🪲🐞 's
+
+If you're an artist, we'd also love to hear from you! Please get in touch :)
+
 # ✍️ Keep in touch!
 
 Congrats if you read all the way through!!!
 
-> A big thank you to the team that helped me develop and deploy Waterlily & Lilypad - including [Luke Marsden](https://twitter.com/lmarsden), [Kai Davenport](https://twitter.com/kai_davenport), [@Wes Floyd](https://twitter.com/weswfloyd), [Simon Worthington](https://twitter.com/51M0NW), [Richard Blythman](https://twitter.com/richardblythman) from [Algovera](https://twitter.com/AlgoveraAI) (absolute star creating the incredible models used) and to the rest of the [Bacalhau](https://twitter.com/BacalhauProject) crew!
+> A big thank you to the team that helped me develop and deploy Waterlily & Lilypad - including [Luke Marsden](https://twitter.com/lmarsden), [Kai Davenport](https://twitter.com/kai_davenport), [@Wes Floyd](https://twitter.com/weswfloyd), [Simon Worthington](https://twitter.com/51M0NW), [Richard Blythman](https://twitter.com/richardblythman) from [Algovera](https://twitter.com/AlgoveraAI) and the rest of the [Bacalhau](https://twitter.com/BacalhauProject) crew - without whom this app would not have been possible.
+> 
+> ![Thank You Hug GIF - Thank You Hug Thanks - Discover & Share GIFs](https://media.tenor.com/BT4-2zX_v8sAAAAC/thank-you-hug.gif align="center")
 
+  
+  
 Keep in touch with us!
 
-* [Filecoin Project Slack](https://filecoinproject.slack.com/) #bacalhau [@filecoinproject](https://filecoinproject.slack.com)
+* [Filecoin Project Slack](https://filecoinproject.slack.com/) #bacalhau
     
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1674791065491/9f66f9b5-858f-4db6-8ed7-83ffd0c63c80.png align="center")
