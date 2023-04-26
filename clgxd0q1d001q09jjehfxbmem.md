@@ -828,7 +828,7 @@ I will additionally note that it might be advantageous to also make this contrac
 
 Right, we have a contract! Let's deploy this to the FVM!
 
-**FVM Network details**
+### **FVM Network details**
 
 See [https://docs.filecoin.io/networks](https://docs.filecoin.io/networks)  
 See also [chainlist.org](https://chainlist.org/?search=Filecoin&testnets=true)
@@ -863,7 +863,7 @@ If you're deploying to a testnet, you'll need to use the faucet to add funds to 
 
 If you're using mainnet, you can add funds via your ledger or from an exchange. See [this guide](https://docs.filecoin.io/basics/assets/transfer-fil/) for more info.
 
-**Deploy on Remix:**
+### **Deploy on Remix**
 
 It's fairly simple to deploy to FVM in remix using Metamask Wallet. To do so open the contract by clicking 👉 [open in remix!](https://remix.ethereum.org/bacalhau-project/Waterlily/blob/develop/hardhat/contracts/WaterlilyPublicContractExample.sol)
 
@@ -889,7 +889,7 @@ On confirming, the contract will be deployed to your connected network. You can 
 
 > ⚠️ Don't forget to save the address for use in our front end!! ⚠️
 
-**Deploy on Hardhat:**
+### **Deploy on Hardhat**
 
 [**Hardhat**](https://hardhat.org/docs) is a development environment for editing, compiling, debugging & deploying Ethereum software. As the FVM is EVM-compatible we can take advantage of this tool
 
@@ -1012,7 +1012,7 @@ The contract address will show on successful deployment.
 
 > ⚠️ Don't forget to save the address for use in our front end!! ⚠️
 
-### Celebrate!
+## **Celebrate!**
 
 You just deployed your contracts to FVM!
 
