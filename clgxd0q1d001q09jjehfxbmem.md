@@ -6,7 +6,7 @@ datePublished: Wed Apr 26 2023 07:13:35 GMT+0000 (Coordinated Universal Time)
 cuid: clgxd0q1d001q09jjehfxbmem
 slug: waterlily-ai
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1682493017480/62a4582e-413d-4ead-9887-884485ff2ad7.png
-tags: ai, smart-contracts, fvm, dreambooth, fevm
+tags: ai, smart-contracts, stable-diffusion, fvm, fevm
 
 ---
 
@@ -1329,7 +1329,7 @@ Waterlily is aiming to provide a new revenue stream for original creators and pe
 
 Congrats if you read all the way through!!!
 
-> A big thank you to the team that helped me develop and deploy Waterlily & Lilypad - including [Luke Marsden](https://twitter.com/lmarsden), [Kai Davenport](https://twitter.com/kai_davenport), [Simon Worthington](https://twitter.com/51M0NW), [Richard Blythman](https://twitter.com/richardblythman) from [Algovera](https://twitter.com/AlgoveraAI) (absolute star creating the incredible models used) and to the rest of the [Bacalhau](https://twitter.com/BacalhauProject) crew!
+> A big thank you to the team that helped me develop and deploy Waterlily & Lilypad - including [Luke Marsden](https://twitter.com/lmarsden), [Kai Davenport](https://twitter.com/kai_davenport), [@Wes Floyd](https://twitter.com/weswfloyd), [Simon Worthington](https://twitter.com/51M0NW), [Richard Blythman](https://twitter.com/richardblythman) from [Algovera](https://twitter.com/AlgoveraAI) (absolute star creating the incredible models used) and to the rest of the [Bacalhau](https://twitter.com/BacalhauProject) crew!
 
 Keep in touch with us!
 
