@@ -1333,7 +1333,7 @@ Congrats if you read all the way through!!!
 
 Keep in touch with us!
 
-* Filecoin Project Slack #bacalhau [@filecoinproject](https://filecoinproject.slack.com)
+* [Filecoin Project Slack](https://filecoinproject.slack.com/) #bacalhau [@filecoinproject](https://filecoinproject.slack.com)
     
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1674791065491/9f66f9b5-858f-4db6-8ed7-83ffd0c63c80.png align="center")
