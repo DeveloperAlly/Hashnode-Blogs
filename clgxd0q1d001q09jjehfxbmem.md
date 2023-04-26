@@ -158,7 +158,7 @@ The FVM is a fully EVM-compatible network (hence the abbreviation - FEVM). This 
 
 ![The Reality of a Developer's Life Gif](https://dz2cdn1.dzone.com/storage/temp/13990131-code-09.gif align="center")
 
-*<mark>Caption: Woo-hoo (dev-style) party time 🎉</mark>*
+*Woo-hoo (dev-style) party time 🎉*
 
 This project relies on 2 main contracts:
 
@@ -380,7 +380,7 @@ Also, side point - hunky dory is a really weird expression... where did it come 
 
 ![GIF spongebob squarepants season 9 episode 13 - animated GIF on GIFER](https://i.gifer.com/ReWf.gif align="center")
 
-*<mark>Caption: these folks look pretty hunky dory...</mark>*
+*These folks look pretty hunky dory...*
 
 * Images!
     
@@ -524,7 +524,7 @@ This is all that's needed on the contract side of things to invoke a Bacalhau jo
 
 ![Cool Cat GIF](https://media.tenor.com/9LjKofWMtV4AAAAM/cool-cat.gif align="center")
 
-<mark>Caption: ^ Totally you right now</mark>
+*^ Totally you right now*
 
 All that needs to happen now is to put the full contract together and deploy it!
 
@@ -1293,13 +1293,12 @@ I've previously written about how to create your own open source Stable Diffusio
 
 %[https://www.youtube.com/watch?v=53uY48e1lis&t=1454s] 
 
-  
 Underlying the finetuning is [Dreambooth](https://arxiv.org/abs/2208.12242), which makes stable diffusion even more powerful with the ability to generate realistic looking pictures of humans, animals or any other object by just training them on 20-30 images.
 
-The specific models used for Waterlily, however, were created by [Richard Blythman](https://twitter.com/richardblythman) from [Algovera](https://twitter.com/AlgoveraAI) (he does some awesome work - check him and the team out!).  
-  
-There's a great guide on how you could get started making scripts like this in the Bacalhau docs on this [here](https://docs.bacalhau.org/examples/model-training/Stable-Diffusion-Dreambooth/).  
-  
+The specific models used for Waterlily, however, were created by [Richard Blythman](https://twitter.com/richardblythman) from [Algovera](https://twitter.com/AlgoveraAI) (he does some awesome work - check him and the team out!).
+
+There's a great guide on how you could get started making scripts like this in the Bacalhau docs on this [here](https://docs.bacalhau.org/examples/model-training/Stable-Diffusion-Dreambooth/).
+
 Check the following repo's out for more inspiration:
 
 * Training and inference of images: [https://github.com/JoePenna/Dreambooth-Stable-Diffusion](https://github.com/JoePenna/Dreambooth-Stable-Diffusion)
