@@ -186,7 +186,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 /**
     @notice An experimental contract for POC work to call Bacalhau jobs from FVM smart contracts
 */
-contract ArtistAttribution is Ownable {
+contract Waterlily is Ownable {
     //ok now what...
 }
 ```
