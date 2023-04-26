@@ -1018,19 +1018,19 @@ You just deployed your contracts to FVM!
 
 ![Dancing Unicorn GIFs | Tenor](https://media.tenor.com/MvvXjGVrnMQAAAAC/dancing-unicorn-unicorn.gif align="center")
 
-## Building the User Interface
+# 📺 Building the User Interface
 
 The UI, or front-end is built on React (NextJS) and Typescript. To build the front end, I'm using NextJS and Typescript. Though, while I use NextJS's routing, I'm not taking advantage of any of NextJS's SSR (server side rendering) features, so you could really just go with a vanilla React set up (or any framework of your choice of course!).
 
-### UI Overview
+## UI Overview
 
 The UI currently consists of two pages built on NextJS and Typescript. The main page is the home page. This is where a user is able to generate new images from a prompt input and browse through artist profiles to decide on a style for the generative art. It is also the page that shows a user's collection of previously generated images and NFTS
 
-![]( align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1682493487140/491dc60e-941e-49e1-ac39-8569b67c56dc.png align="center")
 
 The second page is the Artist Signup form for new artists to join the platform.
 
-### UI Contract Connections
+## UI Contract Connections
 
 There are 3 types of contract interactions here
 
@@ -1127,7 +1127,7 @@ Calling the CreateImage() function in the Waterlily contract with a value of $im
 
 Calling the minting function for the NFT contract is also described in [this blog](https://developerally.com/build-your-own-ai-generated-art-nft-dapp).
 
-### UI Wallet Connections
+## UI Wallet Connections
 
 Here are a few helpful wallet functions you might want, including how to check the chainId or wallet balance, and how to programmatically add a network to Metamask / wallet.  
 You can interact with wallets using the Metamask Ethereum object directly -as I'm doing below or by using ethers.js or web3.js.
@@ -1285,9 +1285,9 @@ export const addWalletNetwork = async () => {
 };
 ```
 
-## Bonus Code Section
+# 💫 Bonus Code Section
 
-### Bonus: Creating & Training the Artist ML Models
+## Bonus: Creating & Training the Artist ML Models
 
 I've previously written about how to create your own open source Stable Diffusion script here and run it on Bacalhau [here](https://developerally.com/build-your-own-ai-generated-art-nft-dapp).
 
@@ -1306,7 +1306,7 @@ Check the following repo's out for more inspiration:
 * Preparation of regularisation images: [https://github.com/aitrepreneur/SD-Regularization-Images-Style-Dreambooth](https://github.com/aitrepreneur/SD-Regularization-Images-Style-Dreambooth)
     
 
-### Bonus: Creating a Private Bacalhau Node Cluster
+## Bonus: Creating a Private Bacalhau Node Cluster
 
 A private cluster is a network of Bacalhau nodes completely isolated from any public node. That means you can safely process private jobs and data on your cloud or on-prem hosts.  
 To create your own private Bacalhau node cluster - you can follow the guide [here](https://docs.bacalhau.org/quick-start-pvt-cluster).
@@ -1325,7 +1325,7 @@ Proving for truth, authenticity and provenance of data and content are going to 
 
 Waterlily is aiming to provide a new revenue stream for original creators and perhaps tackle some of the current issues with AI-Art generation. It could also serve as a thought experiment for how we go about both tokenising and training datasets in fully decentralised ways that continues to give individuals authority over their own data.
 
-## ✍️ Keep in touch!
+# ✍️ Keep in touch!
 
 Congrats if you read all the way through!!!
 
