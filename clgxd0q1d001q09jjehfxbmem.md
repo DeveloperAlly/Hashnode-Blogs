@@ -6,7 +6,7 @@ datePublished: Wed Apr 26 2023 07:13:35 GMT+0000 (Coordinated Universal Time)
 cuid: clgxd0q1d001q09jjehfxbmem
 slug: waterlily-ai
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1682493017480/62a4582e-413d-4ead-9887-884485ff2ad7.png
-tags: ai, smart-contracts, stable-diffusion, fvm, ethical-ai
+tags: ai, web3, smart-contracts, stable-diffusion, ethical-ai
 
 ---
 
@@ -14,7 +14,7 @@ tags: ai, smart-contracts, stable-diffusion, fvm, ethical-ai
 
 Live on FVM at [www.waterlily.ai](http://www.waterlily.ai)
 
-%[https://youtu.be/WD3yrBxunOs]
+%[https://youtu.be/oXNaCs0eyXI]
 
 &nbsp;
 # 📌 Quick Links
