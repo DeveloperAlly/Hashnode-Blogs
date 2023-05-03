@@ -1,11 +1,12 @@
 ---
 title: "🌈🦄 Waterlily.ai - Building an Ethical Text-to-Image AI-Art Site that pays royalties to original creators💸🎨"
-seoTitle: "ethical ai art with stable diffusion and smart contracts on fvm"
+seoTitle: "build ai art dapp with nft, stable diffusion & smart contracts on fvm"
 seoDescription: "Waterlily.ai is aiming to provide an ethical AI art solution by creating a new paradigm for AI image generation that pays creators"
 datePublished: Wed Apr 26 2023 07:13:35 GMT+0000 (Coordinated Universal Time)
 cuid: clgxd0q1d001q09jjehfxbmem
 slug: waterlily-ai
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1682493017480/62a4582e-413d-4ead-9887-884485ff2ad7.png
+ogImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1683116260611/129adb49-c4fe-49b5-80ce-a9446afa99b4.gif
 tags: ai, web3, smart-contracts, stable-diffusion, ethical-ai
 
 ---
@@ -14,16 +15,14 @@ tags: ai, web3, smart-contracts, stable-diffusion, ethical-ai
 
 Live on FVM at [www.waterlily.ai](http://www.waterlily.ai)
 
-%[https://youtu.be/oXNaCs0eyXI]
+%[https://youtu.be/oXNaCs0eyXI] 
 
-&nbsp;
 # 📌 Quick Links
 
 > Github: [https://github.com/bacalhau-project/Waterlily](https://github.com/bacalhau-project/Waterlily)
 > 
 > Docs: [https://docs.bacalhau.org](https://docs.bacalhau.org/)
 
-&nbsp;
 # **👩‍💻 What we'll do...**
 
 In this tutorial I'll take you through how to go about building a similar application to Waterlily.ai on FEVM and Bacalhau, including:
@@ -43,7 +42,6 @@ In this tutorial I'll take you through how to go about building a similar applic
 
 Some knowledge of javascript and solidity is assumed in this tutorial.
 
-&nbsp;
 # 🗺️ Overview
 
 There’s no doubt that AI has reached the mass adoption phase of the technology cycle and is reshaping industries and generating new opportunities across a variety of verticals.
@@ -68,7 +66,6 @@ A user can then opt to download these generated images or mint them as NFTs.
 
 ![Waterlily User Generated Image Examples Gif](https://cdn.hashnode.com/res/hashnode/image/upload/v1682476107570/3e5e30f6-f75c-4051-bae5-ee61dbb0c12b.gif align="center")
 
-&nbsp;
 # 🥞 The Tech Stack
 
 Waterlily relies on two main technology tools -
@@ -151,7 +148,7 @@ More on this later ;)
     
     * [Bacalhau](https://docs.bacalhau.org/) is a peer-to-peer open computation network that provides a platform for public, transparent and optionally verifiable computation processes. It's a decentralised off-chain data computation layer
         
-&nbsp;
+
 # 🏗️ Building the Smart Contracts for Waterlily.ai
 
 Wooo, pre-amble complete - let's make some code!
@@ -839,11 +836,11 @@ Right, we have a contract! Let's deploy this to the FVM!
 See [https://docs.filecoin.io/networks](https://docs.filecoin.io/networks)  
 See also [chainlist.org](https://chainlist.org/?search=Filecoin&testnets=true)
 
-| Chain Name | RPC | ChainID | BlockExplorer | Faucet |
-| --- | --- | --- | --- | --- |
-| Filecoin Calibration Net (**testnet**) | [https://api.calibration.node.glif.io/rpc/v0](https://api.calibration.node.glif.io/rpc/v0) | 314159 | [https://calibration.filscan.io/](https://calibration.filscan.io/), | [https://faucet.calibration.fildev.network/](https://faucet.calibration.fildev.network/) |
-| Filecoin Hyperspace (**testnet**) | [https://api.hyperspace.node.glif.io/rpc/v1](https://api.hyperspace.node.glif.io/rpc/v1), [https://hyperspace.filfox.info/rpc/v1](https://hyperspace.filfox.info/rpc/v1), [https://filecoin-hyperspace.chainstacklabs.com/rpc/v1](https://filecoin-hyperspace.chainstacklabs.com/rpc/v1), [https://rpc.ankr.com/filecoin\_testnet](https://rpc.ankr.com/filecoin_testnet) | 3141 | [https://fvm.starboard.ventures/hyperspace/explorer/tx/](https://fvm.starboard.ventures/hyperspace/explorer/tx/), [https://explorer.glif.io/](https://explorer.glif.io/), | [https://hyperspace.yoga/#faucet](https://hyperspace.yoga/#faucet) |
-| Filecoin Mainnet | [https://api.node.glif.io/rpc/v1](https://api.node.glif.io/rpc/v1), [https://filecoin-mainnet.chainstacklabs.com/rpc/v1](https://filecoin-mainnet.chainstacklabs.com/rpc/v1), [https://rpc.ankr.com/filecoin](https://rpc.ankr.com/filecoin) | 314 | [https://fvm.starboard.ventures/](https://fvm.starboard.ventures/), [https://explorer.glif.io/](https://explorer.glif.io/), [https://beryx.zondax.ch/](https://beryx.zondax.ch/), [https://filfox.io/](https://filfox.io/) |  |
+| Chain Name | LilypadEvents Contract Address | RPC | ChainID | BlockExplorer | Faucet |
+| --- | --- | --- | --- | --- | --- |
+| Filecoin Calibration Net (**testnet**) | 0xdC7612fa94F098F1d7BB40E0f4F4db8fF0bC8820 | [https://api.calibration.node.glif.io/rpc/v0](https://api.calibration.node.glif.io/rpc/v0) | 314159 | [https://calibration.filscan.io/](https://calibration.filscan.io/), | [https://faucet.calibration.fildev.network/](https://faucet.calibration.fildev.network/) |
+| Filecoin Hyperspace (**testnet**) | 0x489656E4eDDD9c88F5Fe863bDEd9Ed0Dc29B224c | [https://api.hyperspace.node.glif.io/rpc/v1](https://api.hyperspace.node.glif.io/rpc/v1), [https://hyperspace.filfox.info/rpc/v1](https://hyperspace.filfox.info/rpc/v1), [https://filecoin-hyperspace.chainstacklabs.com/rpc/v1](https://filecoin-hyperspace.chainstacklabs.com/rpc/v1), [https://rpc.ankr.com/filecoin\_testnet](https://rpc.ankr.com/filecoin_testnet) | 3141 | [https://fvm.starboard.ventures/hyperspace/explorer/tx/](https://fvm.starboard.ventures/hyperspace/explorer/tx/), [https://explorer.glif.io/](https://explorer.glif.io/), | [https://hyperspace.yoga/#faucet](https://hyperspace.yoga/#faucet) |
+| Filecoin Mainnet | 0xc18879C0a781DdFa0258302467687413AaD5a4E6 | [https://api.node.glif.io/rpc/v1](https://api.node.glif.io/rpc/v1), [https://filecoin-mainnet.chainstacklabs.com/rpc/v1](https://filecoin-mainnet.chainstacklabs.com/rpc/v1), [https://rpc.ankr.com/filecoin](https://rpc.ankr.com/filecoin) | 314 | [https://fvm.starboard.ventures/](https://fvm.starboard.ventures/), [https://explorer.glif.io/](https://explorer.glif.io/), [https://beryx.zondax.ch/](https://beryx.zondax.ch/), [https://filfox.io/](https://filfox.io/) |  |
 
 There's quite a few ways to go about deploying this contract - I'll go through deployment on both remix (available in your browser) and utilising [Hardhat](https://hardhat.org/) - an Ethereum developer environment tool.
 
@@ -1024,7 +1021,6 @@ You just deployed your contracts to FVM!
 
 ![Dancing Unicorn GIFs | Tenor](https://media.tenor.com/MvvXjGVrnMQAAAAC/dancing-unicorn-unicorn.gif align="center")
 
-&nbsp;
 # 📺 Building the User Interface
 
 The UI, or front-end is built on React (NextJS) and Typescript. To build the front end, I'm using NextJS and Typescript. Though, while I use NextJS's routing, I'm not taking advantage of any of NextJS's SSR (server side rendering) features, so you could really just go with a vanilla React set up (or any framework of your choice of course!).
@@ -1292,7 +1288,6 @@ export const addWalletNetwork = async () => {
 };
 ```
 
-&nbsp;
 # 💫 Bonus Code Section
 
 ## Bonus: Creating & Training the Artist ML Models
@@ -1321,7 +1316,6 @@ To create your own private Bacalhau node cluster - you can follow the guide [her
 
 ![Magic GIFs | Tenor](https://media.tenor.com/wn2_Qq6flogAAAAM/magical-magic.gif align="center")
 
-&nbsp;
 # **🌟 Possibilities for AI & Blockchain**
 
 The main power of this POC application lies in its open-source tech stack and in combining the capability of decentralised and verifiable ML & AI with Blockchain payments and traceability.
@@ -1334,14 +1328,12 @@ Proving for truth, authenticity and provenance of data and content are going to 
 
 Waterlily is aiming to provide a new revenue stream for original creators and perhaps tackle some of the current issues with AI-Art generation. It could also serve as a thought experiment for how we go about both tokenising and training datasets in fully decentralised ways that continues to give individuals authority over their own data.
 
-&nbsp;
 # 🗺️ Roadmap
 
 Waterlily.ai is an open source repository. We welcome input via the github or submissions of ideas and feedback. Tell us what you think! Tell us what you think should happen next, or help us fix the 🐛🪲🐞 's
 
 If you're an artist, we'd also love to hear from you! Please get in touch :)
 
-&nbsp;
 # ✍️ Keep in touch!
 
 Congrats if you read all the way through!!!
@@ -1350,8 +1342,6 @@ Congrats if you read all the way through!!!
 > 
 > ![Thank You Hug GIF - Thank You Hug Thanks - Discover & Share GIFs](https://media.tenor.com/BT4-2zX_v8sAAAAC/thank-you-hug.gif align="center")
 
-  
-  
 Keep in touch with us!
 
 * [Filecoin Project Slack](https://filecoinproject.slack.com/) #bacalhau
