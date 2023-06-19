@@ -1,5 +1,5 @@
 ---
-title: "🌈🦄 Waterlily.ai - Building an Ethical Text-to-Image AI-Art Site that pays royalties to original creators💸🎨"
+title: "🌈🦄 Waterlily.ai - Building a Text-to-Image AI-Art Site that pays royalties to original creators💸🎨"
 seoTitle: "build ai art dapp with nft, stable diffusion & smart contracts on fvm"
 seoDescription: "Waterlily.ai is aiming to provide an ethical AI art solution by creating a new paradigm for AI image generation that pays creators"
 datePublished: Wed Apr 26 2023 07:13:35 GMT+0000 (Coordinated Universal Time)
