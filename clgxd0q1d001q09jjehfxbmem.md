@@ -19,9 +19,11 @@ Live on FVM at [www.waterlily.ai](http://www.waterlily.ai)
 
 # 📌 Quick Links
 
-> Github: [https://github.com/bacalhau-project/Waterlily](https://github.com/bacalhau-project/Waterlily)
+> Github: [https://github.com/bacalhau-project/Waterlily](https://github.com/bacalhau-project/Waterlily)  
+> Blog: [www.lilypad.tech](https://www.lilypad.tech)
 > 
-> Docs: [https://docs.bacalhau.org](https://docs.bacalhau.org/)
+> Docs: [https://docs.lilypadnetwork.org](https://docs.lilypadnetwork.org/)  
+> Notion: [notion.so/lilypadnetwork](https://lilypadnetwork.notion.site/Waterlily-ai-433c70993c0c4af4a9b5a562f42292c3?pvs=4)
 
 # **👩‍💻 What we'll do...**
 
@@ -1344,7 +1346,7 @@ Congrats if you read all the way through!!!
 
 Keep in touch with us!
 
-* [Filecoin Project Slack](https://filecoinproject.slack.com/) #bacalhau
+* [Filecoin Project Slack](https://filecoinproject.slack.com/) #bacalhau-lilypad
     
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1674791065491/9f66f9b5-858f-4db6-8ed7-83ffd0c63c80.png align="center")
